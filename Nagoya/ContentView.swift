@@ -8,12 +8,37 @@
 import SwiftUI
 import SpriteKit //1
 
-let bg = UIColor.gray
+let bgColor = UIColor.gray
 
 class GameScene : SKScene{
+    
     override func didMove(to view: SKView) {
-        backgroundColor = bg
+        
+        let background = SKSpriteNode(imageNamed: "background")
+        background.position = CGPoint(
+            x: self.size.width*0.5,
+            y: self.size.height*0.5)
+        background.size = self.size
+        self.addChild(background)
+        
+        fallNagoyaSpecialty()
     }
+    
+    func fallNagoyaSpecialty(){
+        
+        let texture = SKTexture(imageNamed: "0")
+        let sprite = SKSpriteNode(texture: texture)
+        
+        sprite.position = CGPoint(
+            x: self.size.width*0.5,
+            y: self.size.height*0.5)
+        sprite.size = CGSize(
+            width: texture.size().width*0.5,
+            height: texture.size().height*0.5)
+        
+        self.addChild(sprite)
+    }
+    
 }
 
 struct ContentView: View {
@@ -26,7 +51,7 @@ struct ContentView: View {
     
     var body: some View {
         ZStack{
-            Color(bg)
+            Color(bgColor)
                 .ignoresSafeArea()
             SpriteView(scene: scene, debugOptions: [.showsFPS, .showsDrawCount])
         }
