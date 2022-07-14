@@ -6,11 +6,30 @@
 //
 
 import SwiftUI
+import SpriteKit //1
+
+let bg = UIColor.gray
+
+class GameScene : SKScene{
+    override func didMove(to view: SKView) {
+        backgroundColor = bg
+    }
+}
 
 struct ContentView: View {
+    
+    var scene: SKScene { //2
+        let scene = GameScene()
+        scene.scaleMode = .resizeFill
+        return scene
+    }
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        ZStack{
+            Color(bg)
+                .ignoresSafeArea()
+            SpriteView(scene: scene, debugOptions: [.showsFPS, .showsDrawCount])
+        }
     }
 }
 
